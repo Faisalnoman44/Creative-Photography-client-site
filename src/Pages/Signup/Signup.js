@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import login from '../../images/icon-256x256.png'
+import login from '../../images/icon-256x256.png';
+import { FaGoogle } from 'react-icons/fa';
 
 const Signup = () => {
     return (
@@ -35,10 +36,15 @@ const Signup = () => {
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Register</button>
                         </div>
+                        <p className='text-center mt-3'>Register with</p>
+                        <div className='text-center w-/12 mx-auto text-3xl mb-3'>
+                            <FaGoogle></FaGoogle>
+                        </div>
                         <p>Already have an account? <Link to='/login' className='text-blue-500 hover:text-primary'>Login</Link></p>
                     </div>
+
                 </form>
-                
+
             </div>
         </div>
     );

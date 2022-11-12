@@ -5,7 +5,7 @@ const Category = ({category}) => {
     return (
         <div>
             <div className="border border-primary mb-3 md:mb-6">
-                <figure><img className='w-full h-72' src={image} alt="Movie" /></figure>
+                <figure><img className='w-full h-full' src={image} alt="Movie" /></figure>
                 <div className="card-body">
                     <h2 className="card-title">{name}</h2>
                     <p>Click the button to watch on Jetflix app.</p>

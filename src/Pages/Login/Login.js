@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import login from '../../images/icon-256x256.png';
+import loginPic from '../../images/icon-256x256.png';
 import { FaGoogle } from 'react-icons/fa';
+import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 
 const Login = () => {
+    const {login} = useContext(AuthContext)
 
     const handleLogin = event =>{
         event.preventDefault();
+        const form = event.target
+        const email = form.email.value;
+        const password = form.password.value;
+
+        login(email, password)
+        .then(result => {
+            const user = result.user;
+            console.log(user)
+
+        })
+        .catch(err => console.error(err));
 
     }
 
@@ -15,7 +28,7 @@ const Login = () => {
         <div className="hero min-h-screen ">
             <div className="hero-content grid grid-cols-1 md:grid-cols-2 gap-20">
                 <div className="text-center lg:text-left hidden md:block">
-                    <img alt='' className='h-[400px] w-full' src={login}></img>
+                    <img alt='' className='h-[400px] w-full' src={loginPic}></img>
                 </div>
                 <div className="card  w-full shadow-2xl bg-base-100 border border-primary">
                 <p className='text-center text-4xl font-semibold mb-4 mt-2'>Login</p>

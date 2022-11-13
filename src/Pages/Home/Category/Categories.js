@@ -6,7 +6,7 @@ const Categories = () => {
     const [categories, setCategories] = useState([])
 
     useEffect(() => {
-        fetch('service.json')
+        fetch('http://localhost:5000/services')
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [])
@@ -22,7 +22,7 @@ const Categories = () => {
                 }
             </div>
             <div className='text-center'>
-                <button className="btn btn-outline btn-primary">Info</button>
+                <Link to='/services'><button className="btn btn-outline btn-primary ">See All</button></Link>
             </div>
         </div>
     );

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const Header = () => {
+    const { user } = useContext(AuthContext)
 
     const menuItem = <>
         <li><Link to='/home'>Home</Link></li>
@@ -30,7 +32,11 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to='/login'><button className="btn btn-warning">Login</button></Link>
+                    {user?.email ?
+                        <Link to='/login'><button className="btn btn-warning"> LogOut </button></Link>
+                        : <Link to='/login'><button className="btn btn-warning"> Login </button></Link>
+                    }
+
                 </div>
             </div>
         </div>

@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import Comment from './Comment';
 
 const CheackOut = () => {
     const { name, detail, price, _id, image } = useLoaderData()
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
+    const [userComments, setUSerComments] = useState([])
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -44,6 +46,14 @@ const CheackOut = () => {
 
     }
 
+    useEffect(()=>{
+        fetch(`http://localhost:5000/comment?service=${_id}`)
+        .then(res => res.json())
+        .then(data => setUSerComments(data));
+    },[_id])
+
+
+
     return (
         <div>
             <h1 className='text-center text-3xl font-semibold my-3'>{name}</h1>
@@ -59,16 +69,20 @@ const CheackOut = () => {
                     </div>
                 </div>
                 <div>
-                    <div>
-
+                    <div className='max-h-screen'>
+                        <h1 className='text-2xl font-semibold text-center mb-3'>Comments</h1>
+                        {
+                          userComments.map(comment =><Comment key={comment._id} comment ={comment}></Comment>)
+                        }
+                        {/* (comment =><Comment key={comment._id} comment ={comment}></Comment>) */}
                     </div>
                     <form onSubmit={handleSubmit}>
-                        <h2 className='text-center text-2xl font-semibold'>Comments</h2>
+                        <h2 className='text-center text-xl font-semibold mb-3'>Leave your comment</h2>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
-                            <input name='firstName' type="text" placeholder="First Name" className="input w-full max-w-xs border border-primary my-2" />
-                            <input name='lastName' type="text" placeholder="Last Name" className="input w-full max-w-xs border border-primary my-2" />
-                            <input name='phone' type="text" placeholder="Phone" className="input w-full max-w-xs border border-primary my-2" />
-                            <input name='email' defaultValue={user?.email} type="email" placeholder="Type here" className="input w-full max-w-xs border border-primary my-2" readOnly />
+                            <input name='firstName' type="text" placeholder="First Name" className="input w-full max-w-xs border border-primary mb-2" />
+                            <input name='lastName' type="text" placeholder="Last Name" className="input w-full max-w-xs border border-primary mb-2" />
+                            <input name='phone' type="text" placeholder="Phone" className="input w-full max-w-xs border border-primary mb-2" />
+                            <input name='email' defaultValue={user?.email} type="email" placeholder="Type here" className="input w-full max-w-xs border border-primary mb-2" readOnly />
                         </div>
                         <textarea name='message' className="textarea w-full h-32 border border-primary my-2" placeholder="comments"></textarea>
 

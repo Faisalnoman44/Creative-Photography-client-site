@@ -5,6 +5,7 @@ import Blog from "../../Pages/Blog/Blog";
 import CheackOut from "../../Pages/CheackOut/CheackOut";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
+import Reviews from "../../Pages/Reviews/Reviews";
 import Services from "../../Pages/Services/Services";
 import Signup from "../../Pages/Signup/Signup";
 
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: '/addservices',
         element: <AddServices></AddServices>
+      },
+      {
+        path:'/review',
+        element:<Reviews></Reviews>
       },
       {
         path: '/blog',

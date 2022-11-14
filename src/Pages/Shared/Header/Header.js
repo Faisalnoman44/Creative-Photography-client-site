@@ -8,14 +8,22 @@ const Header = () => {
     const menuItem = <>
         <li><Link to='/home'>Home</Link></li>
         <li><Link to='/services'>Services</Link></li>
-        <li><Link to='/addservices'>Add Services</Link></li>
+        {
+            user?.email ?
+                <>
+                    <li><Link to='/addservices'>Add Services</Link></li>
+                    <li><Link to='/review'>My Review</Link></li>
+                </> :
+                <></>
+        }
+
         <li><Link to='/blog'>Blog</Link></li>
     </>
 
-    const handleLogout = () =>{
+    const handleLogout = () => {
         logout()
-        .then(data => () =>{})
-        .catch(err => console.error(err))
+            .then(data => () => { })
+            .catch(err => console.error(err))
     }
 
     return (
@@ -39,7 +47,7 @@ const Header = () => {
                 </div>
                 <div className="navbar-end">
                     {user?.email ?
-                        <Link onClick={handleLogout }><button className="btn btn-warning"> LogOut </button></Link>
+                        <Link onClick={handleLogout}><button className="btn btn-warning"> LogOut </button></Link>
                         : <Link to='/login' ><button className="btn btn-warning"> Login </button></Link>
                     }
 

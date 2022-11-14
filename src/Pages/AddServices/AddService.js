@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Category = ({ category }) => {
-    const { _id, name, image, price, detail } = category
+const AddService = ({service}) => {
+    const { _id, name, image, price, detail } = service
     return (
         <div>
             <div className="border border-primary mb-3 md:mb-6">
@@ -12,7 +12,7 @@ const Category = ({ category }) => {
                     <p>{detail.slice(0, 100) + '...'}</p>
                     <p className='text-xl font-semibold'>Price: <span className='text-cyan-700'>${price}</span></p>
                     <div className="card-actions justify-end">
-                        <Link  to={`/services/${_id}`} ><button className="btn btn-primary">View Details</button>
+                        <Link to={`/services/${_id}`} ><button className="btn btn-primary">Add to service</button>
                         </Link>
                     </div>
                 </div>
@@ -21,4 +21,4 @@ const Category = ({ category }) => {
     );
 };
 
-export default Category;
+export default AddService;

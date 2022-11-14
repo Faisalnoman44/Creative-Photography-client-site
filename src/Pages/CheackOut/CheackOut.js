@@ -11,17 +11,19 @@ const CheackOut = () => {
     const handleSubmit = event => {
         event.preventDefault();
         const form = event.target;
-        const name = `${form.firstName.value} ${form.lastName.value}`;
+        const fullName = `${form.firstName.value} ${form.lastName.value}`;
         const phone = form.phone.value;
         const email = user?.email || 'unregistered';
         const message = form.message.value;
 
         const comment = {
             service: _id,
-            customer: name,
+            customer: fullName,
             email,
             phone,
             message,
+            category: name
+            
 
         }
 
@@ -35,28 +37,27 @@ const CheackOut = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                if(data.acknowledged){
+                if (data.acknowledged) {
                     // handleModal()
                     alert('comment submit');
                     form.reset();
                 }
-                
+
             })
             .catch(err => console.error(err))
 
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         fetch(`http://localhost:5000/comment?service=${_id}`)
-        .then(res => res.json())
-        .then(data => setUSerComments(data));
-    },[_id])
+            .then(res => res.json())
+            .then(data => setUSerComments(data));
+    }, [_id])
 
 
 
     return (
         <div>
-            <h1 className='text-center text-3xl font-semibold my-3'>{name}</h1>
             <div className='grid grid-cols-2 gap-3'>
                 <div>
                     <div className="border border-primary mb-3 md:mb-6">
@@ -69,14 +70,13 @@ const CheackOut = () => {
                     </div>
                 </div>
                 <div>
-                    <div className='max-h-screen'>
+                    <div className='min-h-screen'>
                         <h1 className='text-2xl font-semibold text-center mb-3'>Comments</h1>
                         {
-                          userComments.map(comment =><Comment key={comment._id} comment ={comment}></Comment>)
+                            userComments.map(comment => <Comment key={comment._id} comment={comment}></Comment>)
                         }
-                        {/* (comment =><Comment key={comment._id} comment ={comment}></Comment>) */}
                     </div>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className='mb-3'>
                         <h2 className='text-center text-xl font-semibold mb-3'>Leave your comment</h2>
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
                             <input name='firstName' type="text" placeholder="First Name" className="input w-full max-w-xs border border-primary mb-2" />
@@ -92,7 +92,7 @@ const CheackOut = () => {
             </div>
             {/* / modal */}
             <input type="checkbox" id="my-modal" className="modal-toggle" />
-            <div  className="modal">
+            <div className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">Congratulations random Internet user!</h3>
                     <p className="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>

@@ -8,7 +8,7 @@ const Service = ({ service }) => {
             <figure className=''><img className='h-full w-full' src={image} alt="Album" /></figure>
             <div className="card-body">
                 <h2 className="card-title text-3xl text-gray-600">{name}</h2>
-                <p className='text-gray-700'>{detail}</p>
+                <p className='text-gray-700'>{detail.slice(0,100) + '...'}</p>
                 <p className='text-xl'>Price: <span className='text-primary font-bold'>${price}</span></p>
                 <div className="card-actions justify-end">
                     <Link to={`/services/${_id}`} ><button className="btn btn-primary">View Details</button>

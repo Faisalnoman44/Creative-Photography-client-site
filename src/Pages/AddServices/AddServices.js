@@ -13,7 +13,7 @@ const AddServices = () => {
 
     return (
         <div className=' my-4'>
-            <div className='grid grid-cols-2 gap-5'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
                 {
                     addServices.map(service => <AddService
                         key={service._id}

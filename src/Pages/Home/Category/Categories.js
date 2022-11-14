@@ -13,6 +13,7 @@ const Categories = () => {
 
     return (
         <div className=' my-4'>
+            <h3 className='text-center text-3xl  mb-3 font-semibold text-primary'>Services</h3>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {
                     categories.map(category => <Category
@@ -22,7 +23,7 @@ const Categories = () => {
                 }
             </div>
             <div className='text-center'>
-                <Link to='/services'><button className="btn btn-outline btn-primary ">See All</button></Link>
+                <Link to='/services'><button className="btn btn-outline btn-primary mb-3">See All</button></Link>
             </div>
         </div>
     );

@@ -26,9 +26,9 @@ const CheackOut = () => {
             email,
             phone,
             message,
-            
-
+            time : Date()
         }
+        console.log(comment)
 
         fetch('http://localhost:5000/comment', {
             method: 'POST',
@@ -55,15 +55,15 @@ const CheackOut = () => {
         fetch(`http://localhost:5000/comments?service=${_id}`)
             .then(res => res.json())
             .then(data => setUSerComments(data));
-    }, [_id])
+    }, [_id,])
 
 
 
     return (
         <div>
-            <div className='grid grid-cols-2 gap-3'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
                 <div>
-                    <div className="border border-primary mb-3 md:mb-6">
+                    <div className="border border-primary mb-3 md:mb-6 rounded-lg">
                         <figure><img className='w-full h-full' src={image} alt="Movie" /></figure>
                         <div className="card-body">
                             <h2 className="card-title">{name}</h2>
@@ -73,8 +73,8 @@ const CheackOut = () => {
                     </div>
                 </div>
                 <div>
-                    <div className='min-h-fit'>
-                        <h1 className='text-2xl font-semibold text-center mb-3'>Comments</h1>
+                    <div className='h-[550px] overflow-y-auto mb-10'>
+                        <h1 className='text-2xl font-semibold text-center mb-3'>All Comments</h1>
                         {
                             userComments.map(comment => <Comment key={comment._id} comment={comment}></Comment>)
                         }
@@ -83,7 +83,7 @@ const CheackOut = () => {
                     {
                         user?.email ? <form onSubmit={handleSubmit} className='mb-3'>
 
-                        <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
+                        <div className='grid grid-cols-1 md:grid-cols-2 gap-3 w-full'>
                             <input name='firstName' type="text" placeholder="First Name" className="input w-full max-w-xs border border-primary mb-2" required />
                             <input name='lastName' type="text" placeholder="Last Name" className="input w-full max-w-xs border border-primary mb-2" required />
                             <input name='phone' type="text" placeholder="Phone" className="input w-full max-w-xs border border-primary mb-2" />

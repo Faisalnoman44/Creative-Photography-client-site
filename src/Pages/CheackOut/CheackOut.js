@@ -1,5 +1,6 @@
+import { comment } from 'postcss';
 import React, { useContext, useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 import Comment from './Comment';
 
@@ -18,11 +19,11 @@ const CheackOut = () => {
 
         const comment = {
             service: _id,
+            serviceName: name,
             customer: fullName,
             email,
             phone,
             message,
-            category: name
             
 
         }
@@ -49,10 +50,11 @@ const CheackOut = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/comment?service=${_id}`)
+        console.log(_id)
+        fetch(`http://localhost:5000/comments?service=${_id}`)
             .then(res => res.json())
             .then(data => setUSerComments(data));
-    }, [_id])
+    }, [{_id, comment}])
 
 
 
@@ -70,14 +72,16 @@ const CheackOut = () => {
                     </div>
                 </div>
                 <div>
-                    <div className='min-h-screen'>
+                    <div className='min-h-fit'>
                         <h1 className='text-2xl font-semibold text-center mb-3'>Comments</h1>
                         {
                             userComments.map(comment => <Comment key={comment._id} comment={comment}></Comment>)
                         }
                     </div>
-                    <form onSubmit={handleSubmit} className='mb-3'>
-                        <h2 className='text-center text-xl font-semibold mb-3'>Leave your comment</h2>
+                    <h2 className='text-center text-xl font-semibold mb-3'>Leave your comment</h2>
+                    {
+                        user?.email ? <form onSubmit={handleSubmit} className='mb-3'>
+
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
                             <input name='firstName' type="text" placeholder="First Name" className="input w-full max-w-xs border border-primary mb-2" />
                             <input name='lastName' type="text" placeholder="Last Name" className="input w-full max-w-xs border border-primary mb-2" />
@@ -87,7 +91,11 @@ const CheackOut = () => {
                         <textarea name='message' className="textarea w-full h-32 border border-primary my-2" placeholder="comments"></textarea>
 
                         <input className='btn btn-primary' type="submit" value="submit" />
-                    </form>
+                    </form> :
+                    <div className='text-center justify-center text-3xl'>
+                        <p>Please Login to Comment here.. <Link className='text-blue-500' to='/login' >Login</Link></p>
+                    </div>
+                    }
                 </div>
             </div>
             {/* / modal */}

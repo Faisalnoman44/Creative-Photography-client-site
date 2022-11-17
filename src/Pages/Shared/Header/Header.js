@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const Header = () => {
-    const { user, logout } = useContext(AuthContext)
+    const { user, logout, } = useContext(AuthContext)
 
     const menuItem = <>
         <li><Link to='/home'>Home</Link></li>

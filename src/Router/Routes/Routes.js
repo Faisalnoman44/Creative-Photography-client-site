@@ -6,8 +6,10 @@ import CheackOut from "../../Pages/CheackOut/CheackOut";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Reviews from "../../Pages/Reviews/Reviews";
+import UpdateReview from "../../Pages/Reviews/UpdateReview";
 import Services from "../../Pages/Services/Services";
 import Signup from "../../Pages/Signup/Signup";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -28,11 +30,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/addservices',
-        element: <AddServices></AddServices>
+        element: <PrivateRoute><AddServices></AddServices></PrivateRoute>
       },
       {
         path:'/review',
-        element:<Reviews></Reviews>
+        element:<PrivateRoute><Reviews></Reviews></PrivateRoute>
+      },
+      {
+        path:'/updatereview',
+        element:<UpdateReview></UpdateReview>
       },
       {
         path: '/blog',

@@ -1,6 +1,8 @@
 import React from 'react';
+import { titleName } from '../../GeneralFunction/GeneralFunction';
 
 const Blog = () => {
+    titleName('Blog - CP')
     return (
         <div className='mt-3'>
             <div className='border border-primary p-5 my-3'>

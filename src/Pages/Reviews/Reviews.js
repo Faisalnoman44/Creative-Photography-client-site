@@ -1,15 +1,26 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import { titleName } from '../../GeneralFunction/GeneralFunction';
 import Review from './Review';
 
 const Reviews = () => {
-    const { user } = useContext(AuthContext);
+    titleName('Your Reviews - CP')
+    const { user, logout} = useContext(AuthContext);
 
     const [userComments, setUSerComments] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/comment?email=${user?.email}`)
-            .then(res => res.json())
+        fetch(`http://localhost:5000/comment?email=${user?.email}`,{
+            headers:{
+                authorization : `Bearer ${localStorage.getItem('Special-token')}`
+            }
+        })
+            .then(res => {
+                if(res.status === 401 || res.status === 403){
+                    logout();
+                }
+               return res.json()
+            })
             .then(data => setUSerComments(data));
     }, [user?.email])
 

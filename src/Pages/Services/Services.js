@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { titleName } from '../../GeneralFunction/GeneralFunction';
 import Service from './Service';
 
 const Services = () => {
+    titleName('Services - CP')
     const [services, setServices] = useState([]);
 
     useEffect(() => {

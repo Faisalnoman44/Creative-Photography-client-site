@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import login from '../../images/icon-256x256.png';
 import { FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import { titleName } from '../../GeneralFunction/GeneralFunction';
 
 const Signup = () => {
+    titleName('Register - CP')
     const {createUser} = useContext(AuthContext)
 
     const handleRegister = event => {

@@ -2,9 +2,11 @@ import { comment } from 'postcss';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import { titleName } from '../../GeneralFunction/GeneralFunction';
 import Comment from './Comment';
 
 const CheackOut = () => {
+    titleName('Reviews - CP')
     const { name, detail, price, _id, image } = useLoaderData()
     const { user } = useContext(AuthContext);
     const [userComments, setUSerComments] = useState([])
@@ -50,11 +52,10 @@ const CheackOut = () => {
     }
 
     useEffect(() => {
-        console.log(_id)
         fetch(`http://localhost:5000/comments?service=${_id}`)
             .then(res => res.json())
             .then(data => setUSerComments(data));
-    }, [{_id, comment}])
+    }, [_id])
 
 
 
@@ -83,12 +84,12 @@ const CheackOut = () => {
                         user?.email ? <form onSubmit={handleSubmit} className='mb-3'>
 
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
-                            <input name='firstName' type="text" placeholder="First Name" className="input w-full max-w-xs border border-primary mb-2" />
-                            <input name='lastName' type="text" placeholder="Last Name" className="input w-full max-w-xs border border-primary mb-2" />
+                            <input name='firstName' type="text" placeholder="First Name" className="input w-full max-w-xs border border-primary mb-2" required />
+                            <input name='lastName' type="text" placeholder="Last Name" className="input w-full max-w-xs border border-primary mb-2" required />
                             <input name='phone' type="text" placeholder="Phone" className="input w-full max-w-xs border border-primary mb-2" />
                             <input name='email' defaultValue={user?.email} type="email" placeholder="Type here" className="input w-full max-w-xs border border-primary mb-2" readOnly />
                         </div>
-                        <textarea name='message' className="textarea w-full h-32 border border-primary my-2" placeholder="comments"></textarea>
+                        <textarea name='message' className="textarea w-full h-32 border border-primary my-2" placeholder="comments" required></textarea>
 
                         <input className='btn btn-primary' type="submit" value="submit" />
                     </form> :
@@ -96,17 +97,6 @@ const CheackOut = () => {
                         <p>Please Login to Comment here.. <Link className='text-blue-500' to='/login' >Login</Link></p>
                     </div>
                     }
-                </div>
-            </div>
-            {/* / modal */}
-            <input type="checkbox" id="my-modal" className="modal-toggle" />
-            <div className="modal">
-                <div className="modal-box">
-                    <h3 className="font-bold text-lg">Congratulations random Internet user!</h3>
-                    <p className="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
-                    <div className="modal-action">
-                        <label htmlFor="my-modal" className="btn">Yay!</label>
-                    </div>
                 </div>
             </div>
         </div>

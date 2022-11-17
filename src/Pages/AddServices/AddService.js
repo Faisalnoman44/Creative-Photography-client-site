@@ -12,7 +12,7 @@ const AddService = ({service}) => {
                     <p>{detail.slice(0, 100) + '...'}</p>
                     <p className='text-xl font-semibold'>Price: <span className='text-cyan-700'>${price}</span></p>
                     <div className="card-actions justify-end">
-                        <Link to={`/services/${_id}`} ><button className="btn btn-primary">Add to service</button>
+                        <Link><button className="btn btn-primary">Add to service</button>
                         </Link>
                     </div>
                 </div>

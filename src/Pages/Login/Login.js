@@ -3,9 +3,11 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginPic from '../../images/icon-256x256.png';
 import { FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import { titleName } from '../../GeneralFunction/GeneralFunction';
 
 
 const Login = () => {
+    titleName('Login - CP')
     const { login, googleLogin } = useContext(AuthContext)
     const [error, setError] = useState('')
 
@@ -22,10 +24,34 @@ const Login = () => {
 
         login(email, password)
             .then(result => {
-                const user = result.user;
+                const user = result?.user;
+                console.log(user);
+
+                const currentUser = {
+                    email: user?.email
+                }
+                console.log(currentUser)
+
+
+                //jwt token
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        localStorage.setItem('Special-token', data.token);
+                        navigate(from, { replace: true })
+                    })
+
                 setError('')
-                navigate(from, { replace: true })
-                console.log(user)
+
+
 
             })
             .catch(err => console.error(err));

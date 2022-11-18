@@ -1,4 +1,4 @@
-Live link : https://golden-llama-a5203a.netlify.app/
+Live link : https://assignment-11-51e61.web.app/
  
 About Project: This project is about a photography web app.In this project Tailwind CSS and daysiUI framework used.React toast aslo used in this project.
 Mongodb use for database in this project and firebase use for authentication.

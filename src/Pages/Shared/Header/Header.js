@@ -39,8 +39,8 @@ const Header = () => {
                             {menuItem}
                         </ul>
                     </div>
-                    <img className='w-14 rounded-2xl' src={logo} alt="" />
-                    <Link className="btn btn-ghost normal-case text-xl">Creative Photography</Link>
+                    <img className='w-8 md:w-14 rounded-2xl' src={logo} alt="" />
+                    <Link className="btn btn-ghost normal-case text-lg md:text-xl">Creative Photography</Link>
                     
                 </div>
                 <div className="navbar-center hidden lg:flex">

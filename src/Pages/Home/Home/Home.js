@@ -5,6 +5,7 @@ import Banner from '../Banner/Banner';
 import BookMark from '../BookMark/BookMark';
 import Cameras from '../Cameras/Cameras';
 import Categories from '../Category/Categories';
+import WhyBest from '../WhyBest/WhyBest';
 
 const Home = () => {
     titleName('Creative Photograpy')
@@ -15,6 +16,7 @@ const Home = () => {
             <About></About>
             <BookMark></BookMark>
             <Cameras></Cameras>
+            <WhyBest></WhyBest>
         </div>
     );
 };

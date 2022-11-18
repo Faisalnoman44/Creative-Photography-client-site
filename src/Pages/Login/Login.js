@@ -30,8 +30,6 @@ const Login = () => {
                 const currentUser = {
                     email: user?.email
                 }
-                console.log(currentUser)
-
 
                 //jwt token
                 fetch('http://localhost:5000/jwt', {

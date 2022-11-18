@@ -7,23 +7,36 @@ import { titleName } from '../../GeneralFunction/GeneralFunction';
 
 const Signup = () => {
     titleName('Register - CP')
-    const {createUser} = useContext(AuthContext)
+    const { createUser, updateUserProfile } = useContext(AuthContext)
 
     const handleRegister = event => {
         event.preventDefault();
         const form = event.target;
-        const name = form.name.value
+        const name = form.name.value;
+        const photo = form.photourl.value;
         const email = form.email.value;
         const password = form.password.value;
 
         createUser(email, password)
-        .then(result => {
-            const user = result.user;
-            console.log(user)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                form.reset();
+                handleUpdateUserProfile(name, photo);
 
-        })
-        .catch(err => console.error(err));
-        
+            })
+            .catch(err => console.error(err));
+
+    }
+
+    const handleUpdateUserProfile = (name, photo) => {
+        const profile = {
+            displayName: name,
+            photoURL: photo
+        }
+        updateUserProfile(profile)
+            .then(() => { })
+            .catch(err => console.error(err))
     }
 
     return (
@@ -34,12 +47,18 @@ const Signup = () => {
                 </div>
                 <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100 border border-primary">
                     <p className='text-center text-4xl font-semibold mb-4 mt-2'>Register</p>
-                    <form onSubmit={handleRegister}  className="card-body   ">
+                    <form onSubmit={handleRegister} className="card-body   ">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type="text" name='name' placeholder="email" className="input input-bordered" required />
+                            <input type="text" name='name' placeholder="Name" className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">PhotoURL</span>
+                            </label>
+                            <input type="text" name='photourl' placeholder="PhotoURL" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">

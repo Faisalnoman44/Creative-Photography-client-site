@@ -10,8 +10,8 @@ const Cameras = () => {
             .then(data => setCameras(data))
     }, [])
     return (
-        <div>
-            <h3 className='text-center text-3xl  mb-3 font-semibold text-primary'>Camera</h3>
+        <div className='mb-8'>
+            <h3 className='text-center mb-3 text-3xl font-semibold text-primary'>Camera</h3>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                 {
                     cameras.map(camera => <Camera key={camera._id} camera={camera}></Camera>)

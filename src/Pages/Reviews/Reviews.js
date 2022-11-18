@@ -2,10 +2,22 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 import { titleName } from '../../GeneralFunction/GeneralFunction';
 import Review from './Review';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Reviews = () => {
     titleName('Your Reviews - CP')
     const { user, logout} = useContext(AuthContext);
+    const notify = () => toast.success('Successfully Deleted', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+    });
 
     const [userComments, setUSerComments] = useState([]);
 
@@ -35,7 +47,7 @@ const Reviews = () => {
             .then(data =>{
                 console.log(data);
                 if(data.deletedCount > 0){
-                    alert('Deleted');
+                   notify();
                     const remaining = userComments.filter( cmnt => cmnt._id !== id );
                     setUSerComments(remaining)
                 }
@@ -49,6 +61,7 @@ const Reviews = () => {
             {
                 userComments.map(comment => <Review key={comment._id} comment = {comment} handleDelete={handleDelete}></Review>)
             }
+            <ToastContainer></ToastContainer>
         </div>
     );
 };

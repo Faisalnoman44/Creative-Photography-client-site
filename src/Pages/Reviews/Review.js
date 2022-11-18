@@ -9,7 +9,7 @@ const Review = ({ comment, handleDelete }) => {
                 <h2 className="card-title">{serviceName ? serviceName : 'No service found'}</h2>
                 <p>Comment: {message }</p>
                 <div className="card-actions justify-end">
-                    <Link to='/updatereview'><button className="btn btn-primary">Edit</button></Link>
+                    <Link to={`/updatereview/${_id}`}><button className="btn btn-primary">Edit</button></Link>
                     <button onClick={() => handleDelete(_id)}  className="btn btn-primary">Delete</button>
                 </div>
             </div>

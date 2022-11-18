@@ -44,7 +44,7 @@ const BookMark = () => {
     }
 
     return (
-        <div className='w-10/12 mx-auto mb-8'>
+        <div className='w-full md:w-10/12 mx-auto mb-8'>
             {
                 bookMarkServices.length > 0 && <h3 className='text-center text-3xl  mb-3 font-semibold text-primary'>Bookmark</h3>
             }

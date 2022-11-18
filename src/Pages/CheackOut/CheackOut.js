@@ -78,7 +78,7 @@ const CheackOut = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
                 <div>
                     <div className="border border-primary mb-3 md:mb-6 rounded-lg">
-                        <figure><img className='w-full h-full' src={image} alt="Movie" /></figure>
+                        <figure><img className='w-full rounded-tl-lg rounded-tr-lg' src={image} alt="Movie" /></figure>
                         <div className="card-body">
                             <h2 className="card-title">{name}</h2>
                             <p>{detail}</p>
@@ -88,7 +88,10 @@ const CheackOut = () => {
                 </div>
                 <div>
                     <div className='h-[550px] overflow-y-auto mb-10'>
-                        <h1 className='text-2xl font-semibold text-center mb-3'>All Comments</h1>
+                        <h1 className='text-2xl font-semibold text-center mb-3'>All Comments</h1> 
+                        {
+                            userComments.length === 0 && <p className='text-3xl flex items-center justify-center mt-28 font-bold text-teal-300'>No comments</p>
+                        }
                         {
                             userComments.map(comment => <Comment key={comment._id} comment={comment}></Comment>)
                         }
@@ -98,10 +101,10 @@ const CheackOut = () => {
                         user?.email ? <form onSubmit={handleSubmit} className='mb-3'>
 
                             <div className='grid grid-cols-1 md:grid-cols-2 gap-3 w-full'>
-                                <input name='firstName' type="text" placeholder="First Name" className="input w-full max-w-xs border border-primary mb-2" required />
-                                <input name='lastName' type="text" placeholder="Last Name" className="input w-full max-w-xs border border-primary mb-2" required />
-                                <input name='phone' type="text" placeholder="Phone" className="input w-full max-w-xs border border-primary mb-2" />
-                                <input name='email' defaultValue={user?.email} type="email" placeholder="Type here" className="input w-full max-w-xs border border-primary mb-2" readOnly />
+                                <input name='firstName' type="text" placeholder="First Name" className="input w-full md:max-w-xs border border-primary mb-2" required />
+                                <input name='lastName' type="text" placeholder="Last Name" className="input w-full md:max-w-xs border border-primary mb-2" required />
+                                <input name='phone' type="text" placeholder="Phone" className="input w-full md:max-w-xs border border-primary mb-2" />
+                                <input name='email' defaultValue={user?.email} type="email" placeholder="Type here" className="input w-full md:max-w-xs border border-primary mb-2" readOnly />
                             </div>
                             <textarea name='message' className="textarea w-full h-32 border border-primary my-2" placeholder="comments" required></textarea>
 

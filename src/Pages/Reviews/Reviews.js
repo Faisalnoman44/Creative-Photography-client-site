@@ -59,7 +59,9 @@ const Reviews = () => {
     return (
         <div className='w-full min-h-screen'>
             {
-                userComments.map(comment => <Review key={comment._id} comment = {comment} handleDelete={handleDelete}></Review>)
+                userComments.length > 0 ?
+                userComments.map(comment => <Review key={comment._id} comment = {comment} handleDelete={handleDelete}></Review>) :
+                <p className='text-3xl font-bold text-emerald-300 text-center mt-16'>No Review Yet</p>
             }
             <ToastContainer></ToastContainer>
         </div>

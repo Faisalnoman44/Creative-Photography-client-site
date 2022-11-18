@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const AddService = ({ service, handleBookMark }) => {
+    const {user} = useContext(AuthContext)
     const { _id, name, image, price, detail } = service
 
     const bookmark = {
         name,
         image,
         price,
-        detail
+        detail,
+        email : user?.email
     }
 
     return (
@@ -20,7 +23,7 @@ const AddService = ({ service, handleBookMark }) => {
                     <p>{detail.slice(0, 100) + '...'}</p>
                     <p className='text-xl font-semibold'>Price: <span className='text-cyan-700'>${price}</span></p>
                     <div className="card-actions justify-end">
-                        <button onClick={() => handleBookMark(bookmark)} className="btn btn-primary">Add to service</button>
+                        <button onClick={() => handleBookMark(bookmark)} className="btn btn-primary">Add to bookmark</button>
                     </div>
                 </div>
             </div>

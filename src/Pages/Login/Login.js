@@ -95,12 +95,17 @@ const Login = () => {
                         <div className="form-control mt-6">
                             <input className="btn btn-primary" type="submit" value="Login" />
                         </div>
-                        <p className='text-center mt-3'>Login with</p>
-                        <div onClick={handleGoogleLogin} className='text-center w-/12 mx-auto text-3xl mb-3'>
-                            <FaGoogle></FaGoogle>
-                        </div>
-                        <p>New Here? <Link to='/register' className='text-blue-500 hover:text-primary'>Register</Link></p>
                     </form>
+                    <p className='text-center mt-3'>Login with</p>
+                    <div className='text-center w-11/12 mx-auto  mb-3'>
+                        <button onClick={handleGoogleLogin} className='btn btn-ghost text-3xl'>
+                            <FaGoogle></FaGoogle>
+                        </button>
+                    </div>
+                    <div  className='ml-3 mb-3'>
+                        <p>New Here? <Link to='/register' className='text-blue-500 hover:text-primary'>Register</Link></p>
+                    </div>
+
                     <p className='text-center text-red-500 pb-3'>{error}</p>
                 </div>
 

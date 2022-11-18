@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import login from '../../images/icon-256x256.png';
 import { FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
@@ -7,7 +7,11 @@ import { titleName } from '../../GeneralFunction/GeneralFunction';
 
 const Signup = () => {
     titleName('Register - CP')
-    const { createUser, updateUserProfile } = useContext(AuthContext)
+    const { createUser, updateUserProfile, googleLogin } = useContext(AuthContext)
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     const handleRegister = event => {
         event.preventDefault();
@@ -23,10 +27,22 @@ const Signup = () => {
                 console.log(user)
                 form.reset();
                 handleUpdateUserProfile(name, photo);
+                navigate(from, { replace: true })
 
             })
             .catch(err => console.error(err));
 
+    }
+
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(result => {
+                const user = result.user;
+                navigate(from, { replace: true })
+                console.log(user);
+
+            })
+            .catch(error => console.error(error))
     }
 
     const handleUpdateUserProfile = (name, photo) => {
@@ -46,7 +62,7 @@ const Signup = () => {
                     <img alt='' className='h-[400px] w-full' src={login}></img>
                 </div>
                 <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100 border border-primary">
-                    <p className='text-center text-4xl font-semibold mb-4 mt-2'>Register</p>
+                    <p className='text-center text-4xl font-semibold mt-2'>Register</p>
                     <form onSubmit={handleRegister} className="card-body   ">
                         <div className="form-control">
                             <label className="label">
@@ -72,18 +88,18 @@ const Signup = () => {
                             </label>
                             <input type="password" name='password' placeholder="password" className="input input-bordered" required />
                         </div>
-                        <div className="form-control mt-6">
+                        <div className="form-control mt-4 mb-0">
                             <input className="btn btn-primary" type="submit" value="Register" />
                         </div>
-                        <p className='text-center mt-3'>Register with</p>
-                        <div className='text-center w-/12 mx-auto text-3xl mb-3'>
-                            <FaGoogle></FaGoogle>
-                        </div>
-                        <p>Already have an account? <Link to='/login' className='text-blue-500 hover:text-primary'>Login</Link></p>
                     </form>
-
+                    <p className='text-center '>Register with</p>
+                    <div className='text-center w-11/12 mx-auto  '>
+                        <button className='btn btn-ghost mx-auto text-3xl ' onClick={handleGoogleLogin}>
+                            <FaGoogle></FaGoogle>
+                        </button>
+                    </div>
+                    <div className='ml-4 mb-3'><p>Already have an account? <Link to='/login' className='text-blue-500 hover:text-primary'>Login</Link></p></div>
                 </div>
-
             </div>
         </div>
     );

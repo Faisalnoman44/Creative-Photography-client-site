@@ -1,10 +1,12 @@
 import { data } from 'autoprefixer';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import BookMarkService from './BookMarkService';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const BookMark = () => {
+    const {user} = useContext(AuthContext)
     const [bookMarkServices, setBookMarkServices] = useState([])
     const notify = () => toast.success('Successfully Deleted', {
         position: "top-center",
@@ -18,10 +20,10 @@ const BookMark = () => {
     });
 
     useEffect(() => {
-        fetch('http://localhost:5000/bookmark')
+        fetch(`http://localhost:5000/bookmark?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setBookMarkServices(data))
-    }, [])
+    }, [user?.email])
 
     const handleDelete = id => {
         const procced = window.confirm('Are you sure you want to remove');

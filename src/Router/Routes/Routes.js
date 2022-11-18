@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       {
         path: '/updatereview/:id',
         element: <UpdateReview></UpdateReview>,
-        loader: ({ params }) => fetch(`http://localhost:5000/comment/${params.id}`)
+        loader: ({ params }) => fetch(`https://assignment-11-server-side-delta.vercel.app/comment/${params.id}`)
       },
       {
         path: '/blog',
@@ -57,7 +57,7 @@ const router = createBrowserRouter([
       {
         path: '/services/:id',
         element: <CheackOut></CheackOut>,
-        loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
+        loader: ({ params }) => fetch(`https://assignment-11-server-side-delta.vercel.app/services/${params.id}`)
       }
 
 

@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const BookMark = () => {
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const [bookMarkServices, setBookMarkServices] = useState([])
     const notify = () => toast.success('Successfully Deleted', {
         position: "top-center",
@@ -20,7 +20,7 @@ const BookMark = () => {
     });
 
     useEffect(() => {
-        fetch(`http://localhost:5000/bookmark?email=${user?.email}`)
+        fetch(`https://assignment-11-server-side-delta.vercel.app/bookmark?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setBookMarkServices(data))
     }, [user?.email])
@@ -29,7 +29,7 @@ const BookMark = () => {
         const procced = window.confirm('Are you sure you want to remove');
 
         if (procced) {
-            fetch(`http://localhost:5000/bookmark/${id}`, {
+            fetch(`https://assignment-11-server-side-delta.vercel.app/bookmark/${id}`, {
                 method: "DELETE"
             })
                 .then(res => res.json())

@@ -2,28 +2,28 @@ import { useLoaderData } from 'react-router-dom';
 
 const UpdateReview = () => {
     const previousComment = useLoaderData()
-    const {_id, message} = previousComment
-    
-    const handleSubmit = event =>{
+    const { _id, message } = previousComment
+
+    const handleSubmit = event => {
         event.preventDefault()
         const comment = event.target.message.value
         console.log(comment)
-        fetch(`http://localhost:5000/comment/${_id}`,{
+        fetch(`https://assignment-11-server-side-delta.vercel.app/comment/${_id}`, {
             method: 'PATCH',
             headers: {
-                'content-type' : 'application/json'
+                'content-type': 'application/json'
             },
             body: JSON.stringify(comment)
         })
-        .then(res => res.json())
-        .then(data => console.log(data))
+            .then(res => res.json())
+            .then(data => console.log(data))
 
     }
 
     return (
         <div>
-            <form onSubmit={handleSubmit}  className='mb-3'>
-                <textarea name='message' className="textarea w-full h-32 border border-primary my-2" placeholder="comments" defaultValue={message}  required></textarea>
+            <form onSubmit={handleSubmit} className='mb-3'>
+                <textarea name='message' className="textarea w-full h-32 border border-primary my-2" placeholder="comments" defaultValue={message} required></textarea>
                 <input className='btn btn-primary' type="submit" value="submit" />
             </form>
         </div>

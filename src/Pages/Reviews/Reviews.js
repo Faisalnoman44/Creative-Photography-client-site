@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Reviews = () => {
     titleName('Your Reviews - CP')
-    const { user, logout} = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
     const notify = () => toast.success('Successfully Deleted', {
         position: "top-center",
         autoClose: 5000,
@@ -22,36 +22,36 @@ const Reviews = () => {
     const [userComments, setUSerComments] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/comment?email=${user?.email}`,{
-            headers:{
-                authorization : `Bearer ${localStorage.getItem('Special-token')}`
+        fetch(`https://assignment-11-server-side-delta.vercel.app/comment?email=${user?.email}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('Special-token')}`
             }
         })
             .then(res => {
-                if(res.status === 401 || res.status === 403){
+                if (res.status === 401 || res.status === 403) {
                     logout();
                 }
-               return res.json()
+                return res.json()
             })
             .then(data => setUSerComments(data));
     }, [user?.email])
 
-    const handleDelete = id =>{
+    const handleDelete = id => {
         const procced = window.confirm('Are you sure you want to delete');
 
-        if(procced){
-            fetch(`http://localhost:5000/comment/${id}`,{
-                method:"DELETE"
+        if (procced) {
+            fetch(`https://assignment-11-server-side-delta.vercel.app/comment/${id}`, {
+                method: "DELETE"
             })
-            .then(res => res.json())
-            .then(data =>{
-                console.log(data);
-                if(data.deletedCount > 0){
-                   notify();
-                    const remaining = userComments.filter( cmnt => cmnt._id !== id );
-                    setUSerComments(remaining)
-                }
-            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.deletedCount > 0) {
+                        notify();
+                        const remaining = userComments.filter(cmnt => cmnt._id !== id);
+                        setUSerComments(remaining)
+                    }
+                })
         }
 
     }
@@ -60,8 +60,8 @@ const Reviews = () => {
         <div className='w-full min-h-screen'>
             {
                 userComments.length > 0 ?
-                userComments.map(comment => <Review key={comment._id} comment = {comment} handleDelete={handleDelete}></Review>) :
-                <p className='text-3xl font-bold text-emerald-300 text-center mt-16'>No Review Yet</p>
+                    userComments.map(comment => <Review key={comment._id} comment={comment} handleDelete={handleDelete}></Review>) :
+                    <p className='text-3xl font-bold text-emerald-300 text-center mt-16'>No Review Yet</p>
             }
             <ToastContainer></ToastContainer>
         </div>

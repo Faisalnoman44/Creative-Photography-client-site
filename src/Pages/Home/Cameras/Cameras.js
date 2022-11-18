@@ -5,7 +5,7 @@ const Cameras = () => {
     const [cameras, setCameras] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:5000/camera')
+        fetch('https://assignment-11-server-side-delta.vercel.app/camera')
             .then(res => res.json())
             .then(data => setCameras(data))
     }, [])

@@ -5,7 +5,7 @@ const WhyBest = () => {
     const [bestCollection, setBestCollection] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:5000/bestcollection')
+        fetch('https://assignment-11-server-side-delta.vercel.app/bestcollection')
             .then(res => res.json())
             .then(data => setBestCollection(data))
     }, [])

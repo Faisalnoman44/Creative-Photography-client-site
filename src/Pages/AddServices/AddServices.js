@@ -20,13 +20,13 @@ const AddServices = () => {
     });
 
     useEffect(() => {
-        fetch('http://localhost:5000/allservices')
+        fetch('https://assignment-11-server-side-delta.vercel.app/allservices')
             .then(res => res.json())
             .then(data => setAddServices(data))
     }, [])
 
     const handleBookMark = (service) => {
-        fetch('http://localhost:5000/bookmark', {
+        fetch('https://assignment-11-server-side-delta.vercel.app/bookmark', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -44,7 +44,7 @@ const CheackOut = () => {
         }
         console.log(comment)
 
-        fetch('http://localhost:5000/comment', {
+        fetch('https://assignment-11-server-side-delta.vercel.app/comment', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -66,7 +66,7 @@ const CheackOut = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/comments?service=${_id}`)
+        fetch(`https://assignment-11-server-side-delta.vercel.app/comments?service=${_id}`)
             .then(res => res.json())
             .then(data => setUSerComments(data));
     }, [_id, userComments])
@@ -88,7 +88,7 @@ const CheackOut = () => {
                 </div>
                 <div>
                     <div className='h-[550px] overflow-y-auto mb-10'>
-                        <h1 className='text-2xl font-semibold text-center mb-3'>All Comments</h1> 
+                        <h1 className='text-2xl font-semibold text-center mb-3'>All Comments</h1>
                         {
                             userComments.length === 0 && <p className='text-3xl flex items-center justify-center mt-28 font-bold text-teal-300'>No comments</p>
                         }

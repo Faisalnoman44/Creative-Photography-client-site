@@ -43,10 +43,6 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`https://assignment-11-server-side-delta.vercel.app/comment/${params.id}`)
       },
       {
-        path: '/blog',
-        element: <Blog></Blog>
-      },
-      {
         path: '/login',
         element: <Login></Login>
       },

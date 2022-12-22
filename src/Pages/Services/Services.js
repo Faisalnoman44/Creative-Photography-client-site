@@ -13,7 +13,7 @@ const Services = () => {
     }, [])
 
     return (
-        <div className="">
+        <div className="min-h-screen">
             {
                 services.map(service => <Service
                     key={service._id}
